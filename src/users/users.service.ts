@@ -27,4 +27,13 @@ export class UsersService {
       throw err;
     }
   }
+
+  async listUsers() {
+    console.log('Data Get Received.');
+
+    return this.prismaService.user.findMany({
+      select: { id: true, email: true}, 
+      orderBy: { id: 'desc' },
+    });
+  }
 }
