@@ -9,7 +9,6 @@ export class UsersService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async createUser(data: CreateUserRequest) {
-    console.log('Data Received:: ', data);
     try {
       return await this.prismaService.user.create({
         data: {
@@ -28,21 +27,10 @@ export class UsersService {
       throw err;
     }
   }
-  
+
   async getUser(filter: Prisma.UserWhereUniqueInput) {
     return this.prismaService.user.findUniqueOrThrow({
       where: filter,
     });
   }
-
-  async listUsers() {
-    console.log('Data Get Received.');
-
-    return this.prismaService.user.findMany({
-      select: { id: true, email: true}, 
-      orderBy: { id: 'desc' },
-    });
-  }
-
-
 }
