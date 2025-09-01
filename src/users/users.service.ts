@@ -9,7 +9,6 @@ export class UsersService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async createUser(data: CreateUserRequest) {
-    console.log('Data Received:: ', data);
     try {
       return await this.prismaService.user.create({
         data: {
@@ -28,7 +27,7 @@ export class UsersService {
       throw err;
     }
   }
-  
+
   async getUser(filter: Prisma.UserWhereUniqueInput) {
     return this.prismaService.user.findUniqueOrThrow({
       where: filter,
@@ -43,6 +42,4 @@ export class UsersService {
       orderBy: { id: 'desc' },
     });
   }
-
-
 }
