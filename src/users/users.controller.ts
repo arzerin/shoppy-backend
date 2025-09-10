@@ -19,6 +19,7 @@ export class UsersController {
   @Get('me')
   @UseGuards(JwtAuthGuard)
   getMe(@CurrentUser() user: TokenPayload) {
+    console.log('Backend Payload, user Controller', user);
     return user;
   }
 }
