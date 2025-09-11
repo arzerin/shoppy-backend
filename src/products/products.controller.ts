@@ -22,16 +22,21 @@ export class ProductsController {
   @UseGuards(JwtAuthGuard)
   async createProduct(
     @Body() body: CreateProductRequest,
-    @CurrentUser() user?: TokenPayload,
+    @CurrentUser() user: TokenPayload
   ) {
     
-    console.log('Backend Payload, POST Product Controller', user);
-    
-    
+    console.log('Backend Payload, POST Product Controller Data:', user);
+
     const userId = user?.userId ?? 0; // or make userId optional in your service
     console.log("Payload Data", user) ;
     console.log("IN post body", body) ;
     //return body;
     return this.productsService.createProduct(body, 1);
+  }
+
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  async getProducts() {
+    return this.productsService.getProducts();
   }
 }
