@@ -7,6 +7,7 @@ import {
   Param,
   ParseFilePipe,
   Post,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -81,13 +82,17 @@ export class ProductsController {
     _file: Express.Multer.File,
   ) {}
 
+  // @Get()
+  // @UseGuards(JwtAuthGuard)
+  // async getProducts() {
+  //   return this.productsService.getProducts();
+  // }
+
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getProducts() {
-    return this.productsService.getProducts();
+  async getProducts(@Query('status') status?: string) {
+    return this.productsService.getProducts(status);
   }
-
-
   @Get(':productId')
   @UseGuards(JwtAuthGuard)
   async getProduct(@Param('productId') productId: string) {
